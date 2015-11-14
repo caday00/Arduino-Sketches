@@ -1,0 +1,42 @@
+// include the library code:
+#include <LiquidCrystal.h>
+
+const int SW1 = 3; //input where switch 1 is connected
+const int SW2 = 2; //input where switch 2 is connected
+int val1 = 0;
+int val2 = 0;
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 7, 6, 5, 4);
+
+void setup() {
+  //setup pinModes for the switches
+  pinMode(SW1, INPUT);
+  pinMode(SW2, INPUT);
+
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  lcd.print("Power On"); //Prints msg "Power On" on first row
+}
+
+void loop() {
+
+  lcd.setCursor(0, 1); //Sets the cursor to start of 2nd row
+  //This row will display which device is running
+
+  int val1 = digitalRead(SW1);
+  int val2 = digitalRead(SW2);
+
+  if (val1 == HIGH) {
+    lcd.setCursor(0, 1);
+    lcd.write("SW1 ON");
+  }
+  else if (val2 == HIGH) {
+    lcd.setCursor(0, 1);
+    lcd.write("SW2 ON");
+  }
+  else {
+    lcd.setCursor(0, 1);
+    lcd.write("----------------");
+  }
+}
